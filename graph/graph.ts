@@ -6,7 +6,7 @@ interface Element<T> {
 }
 
 interface HashElement<T> {
-  [key: string]: Element<T>;
+  [key: number]: Element<T>;
 }
 
 // expected: HashTable<Element<T, LinkedList<Element<T>>>> = {
@@ -16,20 +16,16 @@ interface HashElement<T> {
 //   4: { value: "test2"}
 // }
 
-class Graph<T> {
-  public table: HashElement<T>;
-
-  constructor() {
-    this.table = {};
-  }
+class Graph<T> implements HashElement<T> {
+  [key: number]: Element<T>;
 
   public getElement(id: number): Element<T> {
-    return this.table[id];
+    return this[id];
   }
 
   public addAEdge(id: number, destination: number) {
-    const element: Element<T> = this.table[id];
-    const d: Element<T> = this.table[destination];
+    const element: Element<T> = this[id];
+    const d: Element<T> = this[destination];
 
     if (!d.adjacents) {
       d.adjacents = new LinkedList<Element<T>>();
@@ -40,7 +36,7 @@ class Graph<T> {
 
   public addElement(id: number, value: T): Element<T> {
     const element: Element<T> = { id, value };
-    this.table[id] = element;
+    this[id] = element;
     return element;
   }
 }
@@ -62,7 +58,7 @@ class LinkedList<T> {
   }
 }
 
-const graph = new Graph();
+const graph = new Graph<string>();
 graph.addElement(1, "test1");
 graph.addElement(2, "test2");
 graph.addElement(3, "test3");
@@ -72,5 +68,5 @@ graph.addAEdge(3, 1);
 graph.addAEdge(2, 1);
 graph.addAEdge(4, 2);
 console.log(graph);
-console.log(graph.table[1].adjacents);
-console.log(graph.table[2].adjacents);
+console.log(graph[1].adjacents);
+console.log(graph[2].adjacents);
