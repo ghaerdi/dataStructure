@@ -1,55 +1,45 @@
 interface Element<T> {
   id: number;
   value: T;
-  adjacents?: LinkedList<Element<T>>;
-  next?: Omit<Element<T>, "id">;
+  adjacents: LinkedList<Element<T>>;
+  next?: Node<T>;
+  previous?: Node<T> 
 }
+
+type Node<T> = Omit<Element<T>, "id" | "adjacents">
 
 interface HashElement<T> {
-  [key: number]: Element<T>;
+  [key: number]: T;
 }
 
-// expected: HashTable<Element<T, LinkedList<Element<T>>>> = {
-//   1: { value: "test1", adjacents: { 2: "...", 3: "..." }},
-//   2: { value: "test2", adjacents: { 4: "..."  }},
-//   3: { value: "test3"},
-//   4: { value: "test2"}
-// }
-
-class Graph<T> implements HashElement<T> {
+class Graph<T> implements HashElement<Element<T>> {
   [key: number]: Element<T>;
 
   public getElement(id: number): Element<T> {
     return this[id];
   }
 
-  public addAEdge(id: number, destination: number) {
-    const element: Element<T> = this[id];
+  public addAEdge(destination: number, id: number) {
     const d: Element<T> = this[destination];
 
-    if (!d.adjacents) {
-      d.adjacents = new LinkedList<Element<T>>();
-    }
+    const element: Element<T> = this[id];
 
     d.adjacents.add(element);
   }
 
   public addElement(id: number, value: T): Element<T> {
-    const element: Element<T> = { id, value };
+    const adjacents = new LinkedList<Element<T>>();
+    const element: Element<T> = { id, value, adjacents };
     this[id] = element;
     return element;
   }
 }
 
 class LinkedList<T> {
-  public head: Omit<Element<T>, "id">;
-
-  constructor() {
-    this.head = null!;
-  }
+  public head: Node<T> | undefined;
 
   public add(value: T): void {
-    const element: Omit<Element<T>, "id"> = { value };
+    const element: Node<T> = { value };
     if (this.head) {
       element.next = this.head;
     }
@@ -64,9 +54,9 @@ graph.addElement(2, "test2");
 graph.addElement(3, "test3");
 graph.addElement(4, "test4");
 
-graph.addAEdge(3, 1);
-graph.addAEdge(2, 1);
-graph.addAEdge(4, 2);
+graph.addAEdge(1, 2);
+graph.addAEdge(1, 3);
+graph.addAEdge(2, 4);
 console.log(graph);
 console.log(graph[1].adjacents);
 console.log(graph[2].adjacents);
