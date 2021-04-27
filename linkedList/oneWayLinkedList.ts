@@ -103,4 +103,9 @@ class OneWayLinkedList<T> {
   }
 }
 
+// const ll = new OneWayLinkedList<string>();
+// ll.add("pepe");
+// ll.remove(0);
+// console.log(ll)
+
 export default OneWayLinkedList;
