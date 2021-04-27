@@ -1,9 +1,9 @@
-import { Element } from "../types.ts";
+import { Node } from "../types.ts";
 
-class LinkedList<T> {
+export default class LinkedList<T> {
   public length: number;
-  public head: Element<T>
-  public tail: Element<T>
+  public head: Node<T>
+  public tail: Node<T>
 
   constructor() {
     this.length = 0;
@@ -12,7 +12,7 @@ class LinkedList<T> {
   }
 
   public add(value: T): void {
-    const element: Element<T> = { value };
+    const element: Node<T> = { value };
 
     if (this.head) {
       element.next = this.head;
@@ -26,7 +26,7 @@ class LinkedList<T> {
   }
 
   public push(value: T): void {
-    const element: Element<T> = { value };
+    const element: Node<T> = { value };
 
     if (this.tail) {
       element.previous = this.tail;
@@ -39,13 +39,13 @@ class LinkedList<T> {
     this.length++;
   }
 
-  public pop(): Element<T> {
+  public pop(): Node<T> {
     if (!this.length) {
       throw "No elements to remove";
     }
 
-    const tempLast: Element<T> = this.tail;
-    const penultimate: Element<T> = tempLast.previous!;
+    const tempLast: Node<T> = this.tail;
+    const penultimate: Node<T> = tempLast.previous!;
 
     if (penultimate) {
       penultimate.next = null!;
@@ -58,12 +58,12 @@ class LinkedList<T> {
     return tempLast;
   }
 
-  public remove(index: number): Element<T> {
+  public remove(index: number): Node<T> {
     if (!this.length) {
       throw "No elements to remove";
     }
 
-    let element: Element<T> = this.get(index);
+    let element: Node<T> = this.get(index);
 
     if (index === 0) {
       element = this.head;
@@ -75,8 +75,8 @@ class LinkedList<T> {
       }
     }
 
-    const previous: Element<T> = element.previous!;
-    const next: Element<T> = element.next!; 
+    const previous: Node<T> = element.previous!;
+    const next: Node<T> = element.next!; 
 
     if (index === this.length-1) {
       this.pop();
@@ -93,11 +93,11 @@ class LinkedList<T> {
     return element;
   }
 
-  public get(index: number): Element<T> { 
+  public get(index: number): Node<T> { 
     if (this.length) {
       throw "No elements to get"
     }
-    let temp: Element<T> = this.head;
+    let temp: Node<T> = this.head;
 
     if (index < this.length - index) {
       for (let count = 0; count < index; count++) {
@@ -113,11 +113,11 @@ class LinkedList<T> {
     return temp;
   }
 
-  public getFirst(): Element<T> {
+  public getFirst(): Node<T> {
     return this.head;
   }
 
-  public getLast(): Element<T> {
+  public getLast(): Node<T> {
     return this.tail;
   }
 }

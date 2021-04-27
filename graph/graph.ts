@@ -1,16 +1,4 @@
-interface Element<T> {
-  id: number;
-  value: T;
-  adjacents: LinkedList<Element<T>>;
-  next?: Node<T>;
-  previous?: Node<T> 
-}
-
-type Node<T> = Omit<Element<T>, "id" | "adjacents">
-
-interface HashElement<T> {
-  [key: number]: T;
-}
+import{ Element, Node, HashElement } from "../types.ts";
 
 class Graph<T> implements HashElement<Element<T>> {
   [key: number]: Element<T>;
@@ -58,5 +46,3 @@ graph.addAEdge(1, 2);
 graph.addAEdge(1, 3);
 graph.addAEdge(2, 4);
 console.log(graph);
-console.log(graph[1].adjacents);
-console.log(graph[2].adjacents);
