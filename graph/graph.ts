@@ -1,4 +1,5 @@
-import{ Element, Node, HashElement } from "../types.ts";
+import { Element, HashElement } from "../types.ts";
+import LinkedList from "../linkedList/linkedList.ts";
 
 class Graph<T> implements HashElement<Element<T>> {
   [key: number]: Element<T>;
@@ -9,30 +10,14 @@ class Graph<T> implements HashElement<Element<T>> {
 
   public addAEdge(destination: number, id: number) {
     const d: Element<T> = this[destination];
-
     const element: Element<T> = this[id];
-
     d.adjacents.add(element);
   }
 
   public addElement(id: number, value: T): Element<T> {
     const adjacents = new LinkedList<Element<T>>();
-    const element: Element<T> = { id, value, adjacents };
-    this[id] = element;
-    return element;
-  }
-}
-
-class LinkedList<T> {
-  public head: Node<T> | undefined;
-
-  public add(value: T): void {
-    const element: Node<T> = { value };
-    if (this.head) {
-      element.next = this.head;
-    }
-
-    this.head = element;
+    this[id] = { id, value, adjacents };
+    return this[id];
   }
 }
 
