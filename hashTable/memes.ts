@@ -1,9 +1,9 @@
 interface Meme {
-  [key: string]: string
+  [key: string]: string;
 }
 
-class HashTable {
-  [key: number]: string 
+class Memes {
+  [key: number]: string;
   
   public add(value: Meme): void {
     const key = Object.keys(value)[0];
@@ -20,7 +20,6 @@ class HashTable {
     const chars: string[] = this.toChars(key);
     const code: number = this.newCode(chars);
     return code;
-    
   }
 
   private newCode(chars: string[]): number {
@@ -41,9 +40,8 @@ class HashTable {
   }
 }
 
-const memes = new HashTable();
+const memes = new Memes();
 
 memes.add({"el pepe": "maico mmg"})
 memes.add({"mague": "manie"})
 console.log(memes)
-console.log(memes.get("el pepe"))
