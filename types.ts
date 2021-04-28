@@ -10,7 +10,3 @@ export interface Element<T> {
 }
 
 export type Node<T> = Omit<Element<T>, "id" | "adjacents">
-
-export interface HashElement<T> {
-  [key: number]: T;
-}

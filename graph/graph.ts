@@ -1,7 +1,7 @@
-import { Element, HashElement } from "../types.ts";
+import { Element } from "../types.ts";
 import LinkedList from "../linkedList/linkedList.ts";
 
-class Graph<T> implements HashElement<Element<T>> {
+class Graph<T> {
   [key: number]: Element<T>;
 
   public getElement(id: number): Element<T> {
@@ -21,13 +21,4 @@ class Graph<T> implements HashElement<Element<T>> {
   }
 }
 
-const graph = new Graph<string>();
-graph.addElement(1, "test1");
-graph.addElement(2, "test2");
-graph.addElement(3, "test3");
-graph.addElement(4, "test4");
-
-graph.addAEdge(1, 2);
-graph.addAEdge(1, 3);
-graph.addAEdge(2, 4);
-console.log(graph);
+export default Graph;
