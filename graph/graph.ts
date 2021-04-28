@@ -18,7 +18,7 @@ class Graph<T> {
   }
 
   public removeElement(id: number) {
-    const element: Element<T> = this[id];
+    delete this[id];
   }
 
   public removeEdge(destination: number, id: number) {
@@ -28,7 +28,7 @@ class Graph<T> {
   }
 
   public BFSearch(id: number, destination: number): boolean {
-    let nextToVisit = new LinkedList<Element<T>>()
+    const nextToVisit = new LinkedList<Element<T>>()
     const visited: Map<boolean> = {};
     nextToVisit.add(this[id]);
     while (!nextToVisit.isEmpty()) {
@@ -38,7 +38,10 @@ class Graph<T> {
 
       visited[element.id] = true;
       for (let index = 0; index < element.adjacents.length; index++) {
-        nextToVisit.add(element.adjacents.get(index).value);
+        let temp: Element<T> = element.adjacents.get(index).value;
+        let exist: boolean = this[temp.id]? true : false;
+        if (exist) nextToVisit.add(temp);
+        else this[element.id].adjacents.remove(index);
       }
     }
     return false;
