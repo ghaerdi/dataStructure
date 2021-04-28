@@ -56,11 +56,4 @@ class LinkedList<T> extends OneWayLinkedList<T> {
   }
 }
 
-const names = new LinkedList<string>();
-names.add("pepe");
-names.add("pepe1");
-names.add("pepe2");
-names.remove(2);
-console.log(names)
-
 export default LinkedList;
