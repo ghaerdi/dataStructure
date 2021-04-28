@@ -21,16 +21,19 @@ class OneWayLinkedList<T> {
     return this.tail;
   }
 
-  public find(value: T): Node<T> {
+  public find(value: T, returnNode?: boolean): Node<T> | number {
     this.noElementError("find");
     let element: Node<T> = this.head;
+    let count = 0;
 
-    for (let count = 0; count < this.length; count++) {
+    for (; count < this.length; count++) {
       if (element.value === value) break;
       element = element.next!;
     }
 
-    return element;
+    if (returnNode) return element;
+
+    return count;
   }
 
   // Add Node
@@ -94,7 +97,7 @@ class OneWayLinkedList<T> {
     return element;
   }
 
-  protected isEmpty(): boolean {
+  public isEmpty(): boolean {
     return this.length ? false : true;
   }
 
@@ -102,10 +105,5 @@ class OneWayLinkedList<T> {
     if (this.isEmpty()) throw `No elements to ${action}`;
   }
 }
-
-// const ll = new OneWayLinkedList<string>();
-// ll.add("pepe");
-// ll.remove(0);
-// console.log(ll)
 
 export default OneWayLinkedList;

@@ -9,4 +9,8 @@ export interface Element<T> {
   previous?: Node<T>;
 }
 
+export interface Map<T> {
+  [key: string]: T
+}
+
 export type Node<T> = Omit<Element<T>, "id" | "adjacents">
