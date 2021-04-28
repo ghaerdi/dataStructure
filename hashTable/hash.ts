@@ -1,7 +1,7 @@
-class HashTable {
-  [key: number]: any;
+class HashTable<T> {
+  [key: number]: T;
 
-  public add(value: any) {
+  public add(value: T) {
     const index = this.newIndex(value);
     if (this[index]) {
       throw `[${value}] Index ${index} already have a value: ${this[index]}`;
@@ -9,7 +9,7 @@ class HashTable {
     this[index] = value;
   }
 
-  public getIndex(value: any): number {
+  public getIndex(value: T): number {
     const index = this.newIndex(value);
     if (!this[index]) {
       throw "No element found";
@@ -24,13 +24,13 @@ class HashTable {
     delete this[index];
   }
 
-  public update(index: number, newValue: any) {
+  public update(index: number, value: T) {
     this.remove(index);
-    this.add(newValue);
+    this.add(value);
   }
 
-  private toChars(text: string): string[] {
-    return text.split("");
+  private toChars(value: string): string[] {
+    return value.split("");
   }
   
   
@@ -43,21 +43,21 @@ class HashTable {
     return code;
   }
 
-  private newIndex(value: any): number {
-    value = String(value);
-    const chars = this.toChars(value);
+  private newIndex(value: T): number {
+    let valueToString: string;
+    if (typeof value === "object") {
+      valueToString = JSON.stringify(value);
+    } else {
+      valueToString = String(value);
+    }
+    const chars = this.toChars(valueToString);
     const code = this.newCode(chars);
     return code;
   }
+
+  private ascii(char: string): number {
+    return char.charCodeAt(0);
+  }
 }
 
-const hash = new HashTable();
-hash.add("pepe");
-hash.add("ajio");
-hash.add("yolo");
-hash.add("mgg");
-hash.add(4);
-hash.add(43);
-hash.add(2000);
-hash.remove("pepe");
-console.log(hash);
+export default HashTable;
