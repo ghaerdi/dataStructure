@@ -19,7 +19,7 @@ class LinkedList<T> extends OneWayLinkedList<T> {
   public push(value: T): void {
     const element: Node<T> = { value };
 
-    if (this.isEmpty()) {
+    if (!this.isEmpty()) {
       element.previous = this.tail;
       this.tail.next = element;
     } else {
@@ -53,6 +53,25 @@ class LinkedList<T> extends OneWayLinkedList<T> {
       nextElement.previous = element.previous;
     }
     this.length--;
+  }
+
+  public pop(): Node<T> {
+    this.noElementError("remove");
+    const removedElement: Node<T> = this.tail;
+
+    if (this.length === 1) {
+      this.head === null!;
+      this.tail === null!;
+    } else {
+      const penultimateElement: Node<T> = removedElement.previous!;
+      if (penultimateElement) {
+        delete penultimateElement.next;
+      }
+      this.tail = penultimateElement;
+    }
+
+    this.length--;
+    return removedElement;
   }
 }
 
