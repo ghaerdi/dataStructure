@@ -40,6 +40,7 @@ class LinkedList<T> extends OneWayLinkedList<T> {
       const element: Node<T> = this.head.next!;
       delete element?.previous;
       this.head = element;
+      this.length--;
       return;
     }
 
@@ -60,8 +61,9 @@ class LinkedList<T> extends OneWayLinkedList<T> {
     const removedElement: Node<T> = this.tail;
 
     if (this.length === 1) {
-      this.head === null!;
-      this.tail === null!;
+      console.log("last element")
+      this.head = null!;
+      this.tail = null!;
     } else {
       const penultimateElement: Node<T> = removedElement.previous!;
       if (penultimateElement) {
