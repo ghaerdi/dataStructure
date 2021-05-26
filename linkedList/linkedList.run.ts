@@ -1,7 +1,5 @@
 import LinkedList from "./linkedList.ts"
 
-let numbers: LinkedList<number> = new LinkedList();
-
 function addNumbers(ll: LinkedList<number>, limit: number): LinkedList<number> {
   for (let num = 0; num < limit; num++) {
     ll.add(num)
@@ -29,7 +27,3 @@ function popNumbers(ll: LinkedList<number>, limit: number): LinkedList<number> {
   }
   return ll
 }
-
-numbers = pushNumbers(numbers, 100);
-numbers = popNumbers(numbers, 100);
-console.log(numbers)

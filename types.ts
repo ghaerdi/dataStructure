@@ -9,8 +9,7 @@ export interface Element<T> {
   previous?: Node<T>;
 }
 
-export interface Map<T> {
-  [key: string]: T
-}
+type Key = string | number
+export type CObject<key extends Key, value> = { [K in key]: value}
 
 export type Node<T> = Omit<Element<T>, "id" | "adjacents">

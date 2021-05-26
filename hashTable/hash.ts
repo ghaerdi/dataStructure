@@ -34,7 +34,7 @@ class HashTable<T> {
   }
   
   
-  private newCode(chars: string[]): number {
+  private hash(chars: string[]): number {
     let code: number = 0;
     for (let index = 0; index < chars.length; index++) {
       code += this.ascii(chars[index]) * (index + 1);
@@ -51,7 +51,7 @@ class HashTable<T> {
       valueToString = String(value);
     }
     const chars = this.toChars(valueToString);
-    const code = this.newCode(chars);
+    const code = this.hash(chars);
     return code;
   }
 
