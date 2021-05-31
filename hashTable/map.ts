@@ -1,14 +1,16 @@
 import { CObject } from "../types.ts";
 import { normalize } from "../utils.ts";
 
-function countWords(text: string): CObject<string, number> {
-  const count: CObject<string, number> = {}
+function countWords(text: string): Map<string, number> {
+  const count = new Map();
   const words = normalize(text).split(' ')
 
   for (let word of words) {
-    let value = count[word]
-    count[word] = value ? value + 1 : 1
+    let value = count.get(word);
+    count.set(word, value ? value + 1 : 1);
   }
 
-  return count
+  return count;
 }
+
+console.log(countWords("el pepe, ajio pepe"));
