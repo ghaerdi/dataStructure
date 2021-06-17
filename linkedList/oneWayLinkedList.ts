@@ -1,15 +1,15 @@
 import { Node } from "../types.ts";
 
-class OneWayLinkedList<T> {
-  protected head: Node<T> = undefined!;
-  protected tail: Node<T> = undefined!;
+class OneWayLinkedList<Value> {
+  protected head: Node<Value> = undefined!;
+  protected tail: Node<Value> = undefined!;
   public length: number = 0;
 
-  public get(index: number): Node<T> {
+  public get(index: number): Node<Value> {
     this.noElementError("get");
     if (index > this.length-1 || index < 0) throw "index out of range";
 
-    let temporal: Node<T> = this.head;
+    let temporal: Node<Value> = this.head;
     for (let count = 0; count < index; count++) {
       temporal = temporal.next!;
     }
@@ -17,13 +17,13 @@ class OneWayLinkedList<T> {
     return temporal;
   }
 
-  public getLast(): Node<T> {
+  public getLast(): Node<Value> {
     return this.tail;
   }
 
-  public find(value: T, returnNode?: boolean): Node<T> | number {
+  public find(value: Value, returnNode?: boolean): Node<Value> | number {
     this.noElementError("find");
-    let element: Node<T> = this.head;
+    let element: Node<Value> = this.head;
     let count = 0;
 
     for (; count < this.length; count++) {
@@ -37,8 +37,8 @@ class OneWayLinkedList<T> {
   }
 
   // Add Node
-  public add(value: T): void {
-    const element: Node<T> = { value };
+  public add(value: Value): void {
+    const element: Node<Value> = { value };
     if (!this.isEmpty()) {
       element.next = this.head;
     } else {
@@ -48,8 +48,8 @@ class OneWayLinkedList<T> {
     this.length++;
   }
 
-  public push(value: T): void {
-    const element: Node<T> = { value };
+  public push(value: Value): void {
+    const element: Node<Value> = { value };
     if (!this.isEmpty()) {
       this.tail.next = element;
     } else {
@@ -71,19 +71,19 @@ class OneWayLinkedList<T> {
       return;
     }
 
-    const previousElement: Node<T> = this.get(index-1);
+    const previousElement: Node<Value> = this.get(index-1);
     previousElement.next = previousElement.next?.next!;
     this.length--;
   }
 
-  public pop(): Node<T> {
+  public pop(): Node<Value> {
     this.noElementError("remove");
-    let removedElement: Node<T> = this.tail;
+    let removedElement: Node<Value> = this.tail;
     if (this.length === 1) {
       this.head = undefined!;
       this.tail = undefined!;
     } else {
-      const element: Node<T> = this.get(this.length-2);
+      const element: Node<Value> = this.get(this.length-2);
       delete element.next;
       this.tail = element;
     }
@@ -91,8 +91,8 @@ class OneWayLinkedList<T> {
     return removedElement;
   }
 
-  public update(index: number, value: T): Node<T> {
-    const element: Node<T> = this.get(index);
+  public update(index: number, value: Value): Node<Value> {
+    const element: Node<Value> = this.get(index);
     element.value = value;
     return element;
   }

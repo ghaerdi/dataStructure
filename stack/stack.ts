@@ -1,5 +1,5 @@
 import LinkedList from "../linkedList/linkedList.ts";
 
-type Stack<T> = LinkedList<T> | T[];
+type Stack<Value> = LinkedList<Value> | Value[];
 
 export default Stack

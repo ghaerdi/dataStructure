@@ -1,15 +1,12 @@
 import LinkedList from "./linkedList/linkedList.ts";
 
-export interface Element<T> {
+export interface Element<Value> {
   id: number;
-  value: T;
-  adjacents: LinkedList<Element<T>>;
-  parent?: Node<T>;
-  next?: Node<T>;
-  previous?: Node<T>;
+  value: Value;
+  adjacents: LinkedList<Element<Value>>;
+  parent?: Node<Value>;
+  next?: Node<Value>;
+  previous?: Node<Value>;
 }
 
-type Key = string | number
-export type CObject<key extends Key, value> = { [K in key]: value}
-
-export type Node<T> = Omit<Element<T>, "id" | "adjacents">
+export type Node<Value> = Omit<Element<Value>, "id" | "adjacents">

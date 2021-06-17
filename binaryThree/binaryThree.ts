@@ -11,7 +11,7 @@ class binaryThree {
   constructor(value?: number) {
     this.head = value ? { value } : null!;
   }
-  
+
   public add(value: number): Element {
     if (!this.head) {
       this.head = { value };
@@ -32,7 +32,7 @@ class binaryThree {
             parent: temp
           }
           return temp.next;
-        } 
+        }
         temp = temp.next;
       }
 
@@ -43,7 +43,7 @@ class binaryThree {
             parent: temp
           }
           return temp.previous;
-        } 
+        }
         temp = temp.previous;
       }
     }

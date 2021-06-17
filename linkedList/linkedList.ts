@@ -1,9 +1,9 @@
 import { Node } from "../types.ts";
 import OneWayLinkedList from "./oneWayLinkedList.ts"
 
-class LinkedList<T> extends OneWayLinkedList<T> {
-  public add(value: T): void {
-    const element: Node<T> = { value };
+class LinkedList<Value> extends OneWayLinkedList<Value> {
+  public add(value: Value): void {
+    const element: Node<Value> = { value };
 
     if (!this.isEmpty()) {
       element.next = this.head;
@@ -16,8 +16,8 @@ class LinkedList<T> extends OneWayLinkedList<T> {
     this.length++;
   }
 
-  public push(value: T): void {
-    const element: Node<T> = { value };
+  public push(value: Value): void {
+    const element: Node<Value> = { value };
 
     if (!this.isEmpty()) {
       element.previous = this.tail;
@@ -37,14 +37,14 @@ class LinkedList<T> extends OneWayLinkedList<T> {
       return;
     }
     if (index === 0) {
-      const element: Node<T> = this.head.next!;
+      const element: Node<Value> = this.head.next!;
       delete element?.previous;
       this.head = element;
       this.length--;
       return;
     }
 
-    const element: Node<T> = this.get(index);
+    const element: Node<Value> = this.get(index);
     const previousElement = element.previous;
     const nextElement = element.next;
     if (previousElement) {
@@ -56,16 +56,16 @@ class LinkedList<T> extends OneWayLinkedList<T> {
     this.length--;
   }
 
-  public pop(): Node<T> {
+  public pop(): Node<Value> {
     this.noElementError("remove");
-    const removedElement: Node<T> = this.tail;
+    const removedElement: Node<Value> = this.tail;
 
     if (this.length === 1) {
       console.log("last element")
       this.head = null!;
       this.tail = null!;
     } else {
-      const penultimateElement: Node<T> = removedElement.previous!;
+      const penultimateElement: Node<Value> = removedElement.previous!;
       if (penultimateElement) {
         delete penultimateElement.next;
       }

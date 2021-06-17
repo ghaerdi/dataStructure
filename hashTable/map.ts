@@ -1,4 +1,3 @@
-import { CObject } from "../types.ts";
 import { normalize } from "../utils.ts";
 
 function countWords(text: string): Map<string, number> {

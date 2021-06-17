@@ -1,7 +1,7 @@
-class HashTable<T> {
-  [key: number]: T;
+class HashValueable<Value> {
+  [key: number]: Value;
 
-  public add(value: T) {
+  public add(value: Value) {
     const index = this.newIndex(value);
     if (this[index]) {
       throw `[${value}] Index ${index} already have a value: ${this[index]}`;
@@ -9,7 +9,7 @@ class HashTable<T> {
     this[index] = value;
   }
 
-  public getIndex(value: T): number {
+  public getIndex(value: Value): number {
     const index = this.newIndex(value);
     if (!this[index]) {
       throw "No element found";
@@ -24,7 +24,7 @@ class HashTable<T> {
     delete this[index];
   }
 
-  public update(index: number, value: T) {
+  public update(index: number, value: Value) {
     this.remove(index);
     this.add(value);
   }
@@ -32,25 +32,24 @@ class HashTable<T> {
   private toChars(value: string): string[] {
     return value.split("");
   }
-  
-  
+
   private hash(chars: string[]): number {
     let code: number = 0;
     for (let index = 0; index < chars.length; index++) {
       code += this.ascii(chars[index]) * (index + 1);
     }
-  
+
     return code;
   }
 
-  private newIndex(value: T): number {
-    let valueToString: string;
+  private newIndex(value: Value): number {
+    let valueValueoString: string;
     if (typeof value === "object") {
-      valueToString = JSON.stringify(value);
+      valueValueoString = JSON.stringify(value);
     } else {
-      valueToString = String(value);
+      valueValueoString = String(value);
     }
-    const chars = this.toChars(valueToString);
+    const chars = this.toChars(valueValueoString);
     const code = this.hash(chars);
     return code;
   }
@@ -60,4 +59,4 @@ class HashTable<T> {
   }
 }
 
-export default HashTable;
+export default HashValueable;

@@ -1,18 +1,17 @@
-import { CObject } from "../types.ts";
 import { random } from "../utils.ts";
 
 type Country = "United States" | "Spain" | "United Kingdom" | "Germany" | "Canada";
 type Languages = string | string[];
 
 function getLanguaje(c: Country): Languages {
-  const languajes: CObject<string, string> = {
+  const languajes: Record<string, string> = {
     es: "Spanish",
     de: "German",
     en: "English",
     fr: "French"
   }
 
-  const countriesAndLanguages: CObject <Country, Languages> = {
+  const countriesAndLanguages: Record<Country, Languages> = {
     "United States": languajes.en,
     "Spain": languajes.es,
     "United Kingdom": languajes.en,
